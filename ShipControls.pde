@@ -20,10 +20,10 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(300, 120, "Reactor\r\nstate", "/system/reactor/setstate", false));
     buttonList.add( new ModToggle(380, 120, "Prop\r\nstate", "/system/propulsion/setstate", false));
     buttonList.add( new ModToggle(460, 120, "Jump\r\nstate", "/system/jump/setstate", false));
-    buttonList.add( new ModToggle(540, 120, "blast\r\nshield", "/system/misc/blastShield", false));
-    buttonList.add( new ModToggle(620, 120, "Gear\r\nstate", "/system/undercarriage/setstate", false));
+    buttonList.add( new ModToggle(540, 120, "blast\r\nshield", "/system/misc/blastShield", true));
+    buttonList.add( new ModToggle(620, 120, "Gear\r\nstate", "/system/undercarriage/setstate", true));
     buttonList.add( new ModToggle(680, 120, "eng\r\n puzzle", "/system/powerManagement/failureState", false));
-    
+
     //eng difficulty  MOVE ME THESE ARE SHIT
     engDiffUp = new APButton(750, 120, 40, 40, "+");
     engDiffDown = new APButton(750, 170, 40, 40, "-");
@@ -32,8 +32,8 @@ public class ShipControls extends ControlPanel {
 
 
     //vid calls
-    buttonList.add( new ModButton(700, 280, "Vid Call", "") );
-    buttonList.add( new ModButton(700, 340, "hang up", "") );
+    buttonList.add( new ModButton(700, 280, "Vid Call", "/clientscreen/CommsStation/incomingCall") );
+    buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/hangUp") );
 
     //screen power
     buttonList.add( new ModToggle(300, 210, "pilot", "/pilot/powerState", false));
@@ -58,9 +58,31 @@ public class ShipControls extends ControlPanel {
     noFill();
     stroke(255, 255, 255);
     rect(690, 270, width-690, height-270);
+    text("Diff: " + engDiff, 680, 100);
   }
 
+  public void onClickWidget(APWidget widget) {
+    super.onClickWidget(widget);
+    
+    if (widget == engDiffUp) {
+      engDiff++;
+      if(engDiff > 10){
+        engDiff = 10;
+      }
+      OscMessage m = new OscMessage("/system/powerManagement/failureSpeed");
+      m.add(engDiff);
+      new SendOSCTask().execute(m);
 
+    } else if (widget == engDiffDown) {
+      engDiff--;
+      if(engDiff < 1){
+        engDiff = 1;
+      }
+      OscMessage m = new OscMessage("/system/powerManagement/failureSpeed");
+      m.add(engDiff);
+      new SendOSCTask().execute(m);
+    }
+  }
 
   public void oscReceive(OscMessage message) {
   }

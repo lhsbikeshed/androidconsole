@@ -20,11 +20,11 @@ String serverIP = "172.31.24.234";
 PFont globalFont;
 TabStrip tabStrip;
 
-ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel;
+ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel;
 
 void setup() {
   oscP5 = new OscP5(this, 12005);
-  shipControls = new ShipControls("ship", this); //create new container for widgets
+  shipControls = new ShipControls("ship", this); 
 
 
   globalFont = createFont("Monospaced-Bold", 20);
@@ -36,7 +36,7 @@ void setup() {
   // tabStrip.addPanel(shipControls, "shipControls");
 
 
-  launchPanel = new LaunchPanel("launchland", this);
+  launchPanel = new LaunchPanel("launch", this);
   tabStrip.addPanel(launchPanel);
 
   hyperPanel = new HyperPanel("Hyperspace", this);
@@ -47,6 +47,9 @@ void setup() {
 
   warzonePanel = new WarzonePanel("Warzone", this);
   tabStrip.addPanel(warzonePanel);
+  
+  landPanel = new LandPanel("landing", this);
+  tabStrip.addPanel(landPanel);
 
   tabStrip.switchToTab("utilities");
 }
@@ -62,8 +65,8 @@ void draw() {
 
 //onClickWidget is called when a widget is clicked/touched
 void onClickWidget(APWidget widget) {
-
   tabStrip.getActivePanel().onClickWidget(widget);
+  shipControls.onClickWidget(widget);
 }
 
 
@@ -95,6 +98,7 @@ void oscEvent(OscMessage theOscMessage) {
   println("ass");
   //pass to active tab
   tabStrip.getActivePanel().oscReceive(theOscMessage);
+  shipControls.oscReceive(theOscMessage);
 }
 
 @Override

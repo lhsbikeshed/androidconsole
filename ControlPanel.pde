@@ -44,6 +44,7 @@ public abstract class ControlPanel{
   public abstract void draw();
   
   public void onClickWidget(APWidget widget){
+     println("Clickbase");
      //check to see if its an OSC sending control
     try {
       ModButton mb = (ModButton)widget;

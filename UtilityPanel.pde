@@ -36,6 +36,8 @@ public class UtilityPanel extends ControlPanel {
   }
 
   public  void draw() {
+    textFont(globalFont, 15);
+    text("IP: " + serverIP, 10, 180);
   }
 
   public  void oscReceive(OscMessage message) {
