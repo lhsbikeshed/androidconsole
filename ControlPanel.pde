@@ -5,7 +5,8 @@ public abstract class ControlPanel{
   String title = "";
   PApplet parent;
   APWidgetContainer widgetContainer;
-  
+  ArrayList<APWidget> buttonList = new ArrayList<APWidget>();
+   
   boolean isVisible = false;
   protected int sceneId = -1;
   
@@ -43,7 +44,10 @@ public abstract class ControlPanel{
   
   public abstract void draw();
   
-  public void onClickWidget(APWidget widget){
+  public void onWidget(APWidget widget){
+    if(!buttonList.contains(widget)){
+      return;
+    }
      println("Clickbase");
      //check to see if its an OSC sending control
     try {

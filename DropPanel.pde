@@ -2,7 +2,6 @@
 
 public class DropPanel extends ControlPanel {
 
-  ArrayList<APWidget> buttonList = new ArrayList<APWidget>();
 
   float altitude = 0;
   float[] temps = new float[6];

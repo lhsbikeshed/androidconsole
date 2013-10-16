@@ -20,7 +20,7 @@ String serverIP = "172.31.24.234";
 PFont globalFont;
 TabStrip tabStrip;
 
-ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel;
+ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel;
 
 void setup() {
   oscP5 = new OscP5(this, 12005);
@@ -50,6 +50,9 @@ void setup() {
   
   landPanel = new LandPanel("landing", this);
   tabStrip.addPanel(landPanel);
+  
+  deadPanel = new EndGamePanel("dead", this);
+  tabStrip.addPanel(deadPanel);
 
   tabStrip.switchToTab("utilities");
 }
@@ -65,8 +68,8 @@ void draw() {
 
 //onClickWidget is called when a widget is clicked/touched
 void onClickWidget(APWidget widget) {
-  tabStrip.getActivePanel().onClickWidget(widget);
-  shipControls.onClickWidget(widget);
+  tabStrip.getActivePanel().onWidget(widget);
+  shipControls.onWidget(widget);
 }
 
 

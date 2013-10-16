@@ -2,7 +2,6 @@
 
 public class WarzonePanel extends ControlPanel {
 
-  ArrayList<APWidget> buttonList = new ArrayList<APWidget>();
 
   String[] beamExcuses = { 
     "Beamed aboard, waiting for airlock..", "Beam blocked", "You broke in, prepare to shoot", "you were dumped out of airlock"
@@ -65,7 +64,10 @@ public class WarzonePanel extends ControlPanel {
 
 
       if (currentExcuse == 2) {
+        int ran = (int)random(255);
+        fill(ran,0,0);
         text("SHOOT THE PLAYERS: " + (5 - (millis() - beamFailTime) / 1000), 10, 280);
+        fill(255,255,255);
       } 
       else {
         text(beamExcuses[currentExcuse], 10, 280);
@@ -73,8 +75,8 @@ public class WarzonePanel extends ControlPanel {
     }
   }
 
-  public void onClickWidget(APWidget widget) {
-    super.onClickWidget(widget);
+  public void onWidget(APWidget widget) {
+    super.onWidget(widget);
     if (widget == diffUp) {
       missileDifficulty += 1;
       if (missileDifficulty >= 10) {

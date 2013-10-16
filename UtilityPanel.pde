@@ -16,20 +16,14 @@ public class UtilityPanel extends ControlPanel {
   }
 
 
-  public void onClickWidget(APWidget widget) {
+  public void onWidget(APWidget widget) {
+    super.onWidget(widget);
     if (widget == setIpButton) { //if it was SetIpButton that was clicked
       //set server ip;
       serverIP = edit.getText();
       println("server ip set to: " + serverIP);
     }
 
-    //check to see if its an OSC sending control
-    try {
-      ModButton mb = (ModButton)widget;
-      new SendOSCTask().execute(mb.getOscMessages());
-    } 
-    catch (ClassCastException e) {
-    }
   }
 
   public  void initGui() {

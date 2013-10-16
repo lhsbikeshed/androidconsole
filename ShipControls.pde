@@ -1,8 +1,18 @@
 
 
 public class ShipControls extends ControlPanel {
+  public boolean reactorState = false;
 
-  ArrayList<APWidget> buttonList = new ArrayList<APWidget>();
+  public boolean canJump = false;
+  public float hull = 0;
+  public float jumpCharge = 0;
+  public float oxygenLevel = 0;
+  public int undercarriageState = 0;
+  public int failureCount = 0;
+  private String[] undercarriageStrings = {
+    "up", "down", "Lowering..", "Raising.."
+  };
+
 
   APButton engDiffUp, engDiffDown;
   int engDiff = 0;
@@ -18,10 +28,10 @@ public class ShipControls extends ControlPanel {
 
     //ship systems
     buttonList.add( new ModToggle(300, 120, "Reactor\r\nstate", "/system/reactor/setstate", false));
-    buttonList.add( new ModToggle(380, 120, "Prop\r\nstate", "/system/propulsion/setstate", false));
-    buttonList.add( new ModToggle(460, 120, "Jump\r\nstate", "/system/jump/setstate", false));
+    buttonList.add( new ModToggle(380, 120, "Prop\r\nstate", "/system/propulsion/state", false));
+    buttonList.add( new ModToggle(460, 120, "Jump\r\nstate", "/system/jump/state", false));
     buttonList.add( new ModToggle(540, 120, "blast\r\nshield", "/system/misc/blastShield", true));
-    buttonList.add( new ModToggle(620, 120, "Gear\r\nstate", "/system/undercarriage/setstate", true));
+    buttonList.add( new ModToggle(620, 120, "Gear\r\nstate", "/system/undercarriage/state", true));
     buttonList.add( new ModToggle(680, 120, "eng\r\n puzzle", "/system/powerManagement/failureState", false));
 
     //eng difficulty  MOVE ME THESE ARE SHIT
@@ -42,6 +52,7 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(540, 210, "engineer", "/engineer/powerState", false));
 
 
+    buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
 
     for (APWidget w : buttonList) {
       widgetContainer.addWidget(w);
@@ -59,23 +70,33 @@ public class ShipControls extends ControlPanel {
     stroke(255, 255, 255);
     rect(690, 270, width-690, height-270);
     text("Diff: " + engDiff, 680, 100);
+
+    text("reactor On?: " + reactorState, 280, 320);
+    text("Can jump? : " + canJump, 280, 340);
+
+    text("Hull Health: " + hull, 280, 360);
+    text("o2 Level: " + oxygenLevel, 280, 380);
+    text("Jump Charge: " + jumpCharge, 280, 400);
+    text("Undercarriage: " + undercarriageStrings[undercarriageState], 280, 420);
   }
 
-  public void onClickWidget(APWidget widget) {
-    super.onClickWidget(widget);
-    
+  public void onWidget(APWidget widget) {
+    if (buttonList.contains(widget)) {
+      super.onWidget(widget);
+    }
+
     if (widget == engDiffUp) {
       engDiff++;
-      if(engDiff > 10){
+      if (engDiff > 10) {
         engDiff = 10;
       }
       OscMessage m = new OscMessage("/system/powerManagement/failureSpeed");
       m.add(engDiff);
       new SendOSCTask().execute(m);
-
-    } else if (widget == engDiffDown) {
+    } 
+    else if (widget == engDiffDown) {
       engDiff--;
-      if(engDiff < 1){
+      if (engDiff < 1) {
         engDiff = 1;
       }
       OscMessage m = new OscMessage("/system/powerManagement/failureSpeed");
@@ -85,6 +106,31 @@ public class ShipControls extends ControlPanel {
   }
 
   public void oscReceive(OscMessage message) {
+
+
+    if (message.checkAddrPattern("/ship/jumpStatus") == true) {  
+      canJump = message.get(0).intValue() == 1 ? true : false;
+    } 
+    else if (message.checkAddrPattern("/ship/stats") == true) {  
+      hull = message.get(2).floatValue();
+      jumpCharge = message.get(0).floatValue() * 100.0;
+      oxygenLevel = message.get(1).floatValue();
+    } 
+    else if (message.checkAddrPattern("/system/powerManagement/failureCount")) {
+      failureCount = message.get(0).intValue();
+    } 
+    else if (message.checkAddrPattern("/ship/undercarriage")) {
+      undercarriageState = message.get(0).intValue();
+    } 
+    else if (message.checkAddrPattern("/system/reactor/stateUpdate")==true) {
+      int s = message.get(0).intValue();
+      if (s == 0) {
+        reactorState = false;
+      } 
+      else {
+        reactorState = true;
+      }
+    }
   }
 }
 
