@@ -39,24 +39,7 @@ public class LaunchPanel extends ControlPanel {
 
   public  void oscReceive(OscMessage message) {
 
-    //loop through togglelist to see if the osc message appears there, if it does set the controls state
-    for (APWidget w : buttonList) {
-      try {
-        ModToggle b = (ModToggle)w;
-        if (b.getServerMessage().equals(message.addrPattern())) {
-          int val = message.get(0).intValue();
-          if (val == 0) {
-            b.setChecked(false & !b.isInverted());
-          } 
-          else {
-            b.setChecked(true & !b.isInverted());
-          }
-          break;
-        }
-      } 
-      catch (ClassCastException e) {
-      }
-    }
+    
   }
 }
 

@@ -11,9 +11,9 @@ public class LandPanel extends ControlPanel {
     buttonList.add( new ModToggle(20, 50, "Bay Doors", "/scene/launchland/dockingBay", true) );
     buttonList.add( new ModToggle(110, 50, "Grav", "/scene/launchland/bayGravity", false) );
     buttonList.add( new ModButton(170, 50, "Dock", "/scene/launchland/startDock") );
-    
-   
-   
+
+    buttonList.add( new ModButton(20, 150, "WIN THE GAME", "/game/gameWin") );
+
     for (APWidget w : buttonList) {
       widgetContainer.addWidget(w);
     }
@@ -33,24 +33,6 @@ public class LandPanel extends ControlPanel {
 
   public  void oscReceive(OscMessage message) {
 
-    //loop through togglelist to see if the osc message appears there, if it does set the controls state
-    for (APWidget w : buttonList) {
-      try {
-        ModToggle b = (ModToggle)w;
-        if (b.getServerMessage().equals(message.addrPattern())) {
-          int val = message.get(0).intValue();
-          if (val == 0) {
-            b.setChecked(false & !b.isInverted());
-          } 
-          else {
-            b.setChecked(true & !b.isInverted());
-          }
-          break;
-        }
-      } 
-      catch (ClassCastException e) {
-      }
-    }
   }
 }
 

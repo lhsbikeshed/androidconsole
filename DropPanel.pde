@@ -55,7 +55,7 @@ public class DropPanel extends ControlPanel {
       else {
         fill(255, 0, 0);
       }
-      text(tempNames[i] + " : " + temps[i], 10, 230 + i * 15);
+      text(tempNames[i] + " : " + (int)temps[i], 10, 230 + i * 15);
     }
 
     fill(255, 255, 255);

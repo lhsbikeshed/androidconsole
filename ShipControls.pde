@@ -2,7 +2,7 @@
 
 public class ShipControls extends ControlPanel {
   public boolean reactorState = false;
-
+  public boolean autoPilotState = false;
   public boolean canJump = false;
   public float hull = 0;
   public float jumpCharge = 0;
@@ -53,7 +53,7 @@ public class ShipControls extends ControlPanel {
 
 
     buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
-
+    buttonList.add( new ModToggle(540, 340, "autopilot", "/system/control/controlState", false));
     for (APWidget w : buttonList) {
       widgetContainer.addWidget(w);
     }
@@ -71,13 +71,21 @@ public class ShipControls extends ControlPanel {
     rect(690, 270, width-690, height-270);
     text("Diff: " + engDiff, 680, 100);
 
+    text("failed reactor systems: " + failureCount + "/8", 280, 300);
     text("reactor On?: " + reactorState, 280, 320);
     text("Can jump? : " + canJump, 280, 340);
+    if(canJump){
+      noFill();
+      stroke(0,255,0);
+      rect(610,330, 90,50);
+    }
 
     text("Hull Health: " + hull, 280, 360);
     text("o2 Level: " + oxygenLevel, 280, 380);
     text("Jump Charge: " + jumpCharge, 280, 400);
     text("Undercarriage: " + undercarriageStrings[undercarriageState], 280, 420);
+    
+    text("autopilot on?: " + autoPilotState, 500, 400);
   }
 
   public void onWidget(APWidget widget) {
@@ -130,6 +138,9 @@ public class ShipControls extends ControlPanel {
       else {
         reactorState = true;
       }
+    }
+    else if (message.checkAddrPattern("/system/control/controlState")==true) {
+      autoPilotState = message.get(0).intValue() == 1 ? true : false;
     }
   }
 }

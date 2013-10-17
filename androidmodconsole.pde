@@ -15,7 +15,7 @@ OscP5 oscP5;
 
 
 NetAddress myRemoteLocation;                            
-String serverIP = "172.31.24.234";  
+String serverIP = "192.168.0.17";  
 
 PFont globalFont;
 TabStrip tabStrip;
@@ -98,7 +98,7 @@ void oscEvent(OscMessage theOscMessage) {
     int scene = theOscMessage.get(0).intValue();
     tabStrip.switchToTab(scene);
   }
-  println("ass");
+ // println("ass");
   //pass to active tab
   tabStrip.getActivePanel().oscReceive(theOscMessage);
   shipControls.oscReceive(theOscMessage);
