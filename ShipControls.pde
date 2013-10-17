@@ -77,7 +77,7 @@ public class ShipControls extends ControlPanel {
     if(canJump){
       noFill();
       stroke(0,255,0);
-      rect(610,330, 90,50);
+      rect(610,330, 60,50);
     }
 
     text("Hull Health: " + hull, 280, 360);
