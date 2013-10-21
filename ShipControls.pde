@@ -14,7 +14,7 @@ public class ShipControls extends ControlPanel {
   };
 
 
-  APButton engDiffUp, engDiffDown;
+  APButton engDiffUp, engDiffDown, killButton;
   int engDiff = 0;
 
   public ShipControls(String title, PApplet parent) {
@@ -25,6 +25,8 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModButton(380, 50, "Reactor\r\nFail", "/system/reactor/fail") );
     buttonList.add( new ModButton(460, 50, "Self\r\nDestruct", "/system/reactor/overload") );
     buttonList.add( new ModButton(540, 50, "SD Cancel", "/system/reactor/overloadinterrupt") );
+    killButton = new APButton(620, 50, "kill ship");
+    buttonList.add( killButton);
 
     //ship systems
     buttonList.add( new ModToggle(300, 120, "Reactor\r\nstate", "/system/reactor/setstate", false));
@@ -69,7 +71,7 @@ public class ShipControls extends ControlPanel {
     noFill();
     stroke(255, 255, 255);
     rect(690, 270, width-690, height-270);
-    text("Diff: " + engDiff, 680, 100);
+    text("Diff: " + engDiff, 680, 250);
 
     text("failed reactor systems: " + failureCount + "/8", 280, 300);
     text("reactor On?: " + reactorState, 280, 320);
@@ -110,7 +112,12 @@ public class ShipControls extends ControlPanel {
       OscMessage m = new OscMessage("/system/powerManagement/failureSpeed");
       m.add(engDiff);
       new SendOSCTask().execute(m);
+    } else if(widget == killButton){
+      OscMessage m = new OscMessage("/game/KillPlayers");
+      m.add("Dead");
+      new SendOSCTask().execute(m);
     }
+      
   }
 
   public void oscReceive(OscMessage message) {
