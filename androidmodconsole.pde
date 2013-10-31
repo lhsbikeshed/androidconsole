@@ -20,7 +20,7 @@ String serverIP = "192.168.0.17";
 PFont globalFont;
 TabStrip tabStrip;
 
-ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel;
+ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel, lightPanel;
 
 void setup() {
   oscP5 = new OscP5(this, 12005);
@@ -53,6 +53,9 @@ void setup() {
   
   deadPanel = new EndGamePanel("dead", this);
   tabStrip.addPanel(deadPanel);
+
+  lightPanel = new LightPanel("lighting", this);
+  tabStrip.addPanel(lightPanel);
 
   tabStrip.switchToTab("utilities");
 }
