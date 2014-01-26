@@ -11,14 +11,17 @@ public class WarzonePanel extends ControlPanel {
   long beamFailTime = 0;
 
   int missileDifficulty = 1;
+  int beamDifficulty = 1;
   APButton diffUp, diffDown;
+  APButton beamUp, beamDown;
+  APButton beamButton;
 
   public WarzonePanel(String title, PApplet parent) {
     super(title, parent);
 
 
     buttonList.add( new ModButton(20, 50, "Start War", "/scene/warzone/warzonestart") );
-    buttonList.add( new ModButton(110, 50, "Beam Attempt", "/system/transporter/startBeamAttempt") );
+    //buttonList.add( new ModButton(110, 50, "Beam Attempt", "/system/transporter/startBeamAttempt") );
     buttonList.add( new ModButton(20, 100, "Spawn Gate", "/scene/warzone/spawnGate") );
     buttonList.add( new ModButton(120, 100, "Shoot at ship", "/scene/warzone/createBastard") );
 
@@ -40,6 +43,13 @@ public class WarzonePanel extends ControlPanel {
     widgetContainer.addWidget(diffUp);
     widgetContainer.addWidget(diffDown);
 
+    beamUp = new APButton(180, 300, 40, 40, "+");
+    beamDown = new APButton(20, 300, 40, 40, "-");
+    widgetContainer.addWidget(beamUp);
+    widgetContainer.addWidget(beamDown);
+
+    beamButton = new APButton(110, 340, "Beam Attempt");
+    widgetContainer.addWidget(beamButton);
 
     //map this tab to a scene number from the game
     setSceneNumber(3);
@@ -56,21 +66,24 @@ public class WarzonePanel extends ControlPanel {
 
   public  void draw() {
     textFont(globalFont, 13);
-    text("Diffuculty: " + missileDifficulty, 60, 220);
+    text("Missile\r\nDifficulty: " + missileDifficulty, 60, 216);
+    textFont(globalFont, 13);
+    text("Beam\r\nDifficulty: " + beamDifficulty, 60, 320);
 
-    text("Beam status:", 10, 250 );
+
+    text("Beam status:", 10, 260 );
     if (currentExcuse!=-1) {
       fill(255, 255, 255);
 
 
       if (currentExcuse == 2) {
         int ran = (int)random(255);
-        fill(ran,0,0);
-        text("SHOOT THE PLAYERS: " + (5 - (millis() - beamFailTime) / 1000), 10, 280);
-        fill(255,255,255);
+        fill(ran, 0, 0);
+        text("SHOOT THE PLAYERS: " + (5 - (millis() - beamFailTime) / 1000), 10, 290);
+        fill(255, 255, 255);
       } 
       else {
-        text(beamExcuses[currentExcuse], 10, 280);
+        text(beamExcuses[currentExcuse], 10, 290);
       }
     }
   }
@@ -94,9 +107,25 @@ public class WarzonePanel extends ControlPanel {
       OscMessage m = new OscMessage("/scene/warzone/missileRate");
       m.add(missileDifficulty);
       new SendOSCTask().execute(m);
+    } 
+    else if (widget == beamDown) {
+      beamDifficulty -= 1;
+      if (beamDifficulty < 1) {
+        beamDifficulty = 1;
+      }
+    } 
+    else if (widget == beamUp) {
+      beamDifficulty += 1;
+      if (beamDifficulty > 10) {
+        beamDifficulty = 10;
+      }
+    }
+    else if (widget == beamButton) {
+      OscMessage m = new OscMessage("/system/transporter/startBeamAttempt");
+      m.add(beamDifficulty);
+      new SendOSCTask().execute(m);
     }
   }
-
 
   public  void oscReceive(OscMessage message) {
 
