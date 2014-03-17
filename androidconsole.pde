@@ -15,7 +15,7 @@ OscP5 oscP5;
 
 
 NetAddress myRemoteLocation;                            
-String serverIP = "192.168.0.17";  
+String serverIP = "10.0.0.100";  
 
 PFont globalFont;
 TabStrip tabStrip;
