@@ -17,6 +17,7 @@ public class ShipControls extends ControlPanel {
 
   APButton engDiffUp, engDiffDown, killButton;
   int engDiff = 0;
+  long missionStartTime = 0;
 
   public ShipControls(String title, PApplet parent) {
     super(title, parent);
@@ -72,15 +73,17 @@ public class ShipControls extends ControlPanel {
     noFill();
     stroke(255, 255, 255);
     rect(690, 270, width-690, height-270);
-    text("Diff: " + engDiff, 680, 250);
+    text("Diff: " + engDiff, 680, 200);
 
     text("failed reactor systems: " + failureCount + " / " + maxFailures, 280, 300);
     text("reactor On?: " + reactorState, 280, 320);
     text("Can jump? : " + canJump, 280, 340);
     if(canJump){
       noFill();
-      stroke(0,255,0);
+      strokeWeight(3);
+      stroke(255,255,0);
       rect(610,330, 60,50);
+      strokeWeight(1);
     }
 
     text("Hull Health: " + hull, 280, 360);
@@ -88,7 +91,14 @@ public class ShipControls extends ControlPanel {
     text("Jump Charge: " + jumpCharge, 280, 400);
     text("Undercarriage: " + undercarriageStrings[undercarriageState], 280, 420);
     
-    text("autopilot on?: " + autoPilotState, 500, 400);
+    text("AP?: " + autoPilotState, 530, 400);
+    
+    long t = millis() - missionStartTime;
+    int min = (int)((t / 1000 / 60) % 60);
+    int sec = (int)((t / 1000) % 60);
+    
+    text("T: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), 630, 230);
+    
   }
 
   public void onWidget(APWidget widget) {
@@ -150,6 +160,8 @@ public class ShipControls extends ControlPanel {
     }
     else if (message.checkAddrPattern("/system/control/controlState")==true) {
       autoPilotState = message.get(0).intValue() == 1 ? true : false;
+    } else if (message.checkAddrPattern("/game/reset")) {
+      missionStartTime = millis();
     }
   }
 }
