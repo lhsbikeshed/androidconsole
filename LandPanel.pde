@@ -23,7 +23,7 @@ public class LandPanel extends ControlPanel {
     
     
     ModButton m3 =  new ModButton(10, 390, "JumpHere", "/game/takeMeTo");
-    m3.setValue(5);
+    m3.setValue(4);
     buttonList.add( m3 );
 
     for (APWidget w : buttonList) {
