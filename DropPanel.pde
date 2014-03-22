@@ -24,6 +24,11 @@ public class DropPanel extends ControlPanel {
     buttonList.add(m2 );
 
 
+    ModButton m3 =  new ModButton(10, 390, "JumpHere", "/game/takeMeTo");
+    m3.setValue(3);
+    buttonList.add( m3 );
+    
+
     for (APWidget w : buttonList) {
       widgetContainer.addWidget(w);
     }

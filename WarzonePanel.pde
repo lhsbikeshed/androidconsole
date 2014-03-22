@@ -34,6 +34,10 @@ public class WarzonePanel extends ControlPanel {
      buttonList.add( new ModButton(120, 250, "NPC to gate", "/scene/launchland/otherShipToGate") );
      buttonList.add( new ModButton(20, 300, "NPC hyper", "/scene/launchland/otherShipHyperspace") );*/
 
+    ModButton m3 =  new ModButton(10, 390, "JumpHere", "/game/takeMeTo");
+    m3.setValue(4);
+    buttonList.add( m3 );
+    
     for (APWidget w : buttonList) {
       widgetContainer.addWidget(w);
     }

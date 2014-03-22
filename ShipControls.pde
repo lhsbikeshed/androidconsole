@@ -9,6 +9,7 @@ public class ShipControls extends ControlPanel {
   public float oxygenLevel = 0;
   public int undercarriageState = 0;
   public int failureCount = 0;
+  public int maxFailures = 0;
   private String[] undercarriageStrings = {
     "up", "down", "Lowering..", "Raising.."
   };
@@ -73,7 +74,7 @@ public class ShipControls extends ControlPanel {
     rect(690, 270, width-690, height-270);
     text("Diff: " + engDiff, 680, 250);
 
-    text("failed reactor systems: " + failureCount + "/8", 280, 300);
+    text("failed reactor systems: " + failureCount + " / " + maxFailures, 280, 300);
     text("reactor On?: " + reactorState, 280, 320);
     text("Can jump? : " + canJump, 280, 340);
     if(canJump){
@@ -133,6 +134,7 @@ public class ShipControls extends ControlPanel {
     } 
     else if (message.checkAddrPattern("/system/powerManagement/failureCount")) {
       failureCount = message.get(0).intValue();
+      maxFailures = message.get(1).intValue();
     } 
     else if (message.checkAddrPattern("/ship/undercarriage")) {
       undercarriageState = message.get(0).intValue();
