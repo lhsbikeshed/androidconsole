@@ -23,6 +23,8 @@ TabStrip tabStrip;
 ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel, lightPanel;
 
 void setup() {
+  orientation(LANDSCAPE);
+  
   oscP5 = new OscP5(this, 12005);
   shipControls = new ShipControls("ship", this); 
 
