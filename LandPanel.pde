@@ -10,8 +10,8 @@ public class LandPanel extends ControlPanel {
     //  ModButton mb = new ModButton(150, 50, "test button", "/string/test");
     // widgetContainer.addWidget(mb);
     
-    buttonList.add( new ModToggle(20, 190, "Bay Doors", "/scene/launchland/dockingBay", true) );
-    buttonList.add( new ModToggle(110, 190, "Grav", "/scene/launchland/bayGravity", false) );
+    buttonList.add( new ModToggle(20, 190, "Bay Doors\r\nOpen", "Bay Doors\r\nClosed", "/scene/launchland/dockingBay", true) );
+    buttonList.add( new ModToggle(110, 190, "Grav On", "Grav Off", "/scene/launchland/bayGravity", false) );
     buttonList.add( new ModButton(170, 190, "Dock", "/scene/launchland/startDock") );
 
     buttonList.add( new ModButton(20, 250, "WIN THE GAME", "/game/gameWin") );

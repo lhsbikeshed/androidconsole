@@ -31,12 +31,12 @@ public class ShipControls extends ControlPanel {
     buttonList.add( killButton);
 
     //ship systems
-    buttonList.add( new ModToggle(300, 120, "Reactor\r\nstate", "/system/reactor/setstate", false));
-    buttonList.add( new ModToggle(380, 120, "Prop\r\nstate", "/system/propulsion/state", false));
-    buttonList.add( new ModToggle(460, 120, "Jump\r\nstate", "/system/jump/state", false));
-    buttonList.add( new ModToggle(540, 120, "blast\r\nshield", "/system/misc/blastShield", true));
-    buttonList.add( new ModToggle(620, 120, "Gear\r\nstate", "/system/undercarriage/state", true));
-    buttonList.add( new ModToggle(680, 120, "eng\r\n puzzle", "/system/powerManagement/failureState", false));
+    buttonList.add( new ModToggle(300, 120, "Reactor", "/system/reactor/setstate", false));
+    buttonList.add( new ModToggle(380, 120, "Prop", "/system/propulsion/state", false));
+    buttonList.add( new ModToggle(460, 120, "Jump", "/system/jump/state", false));
+    buttonList.add( new ModToggle(540, 120, "Blast\r\nShield\r\nDown", "Blast\r\nShield\r\nUp", "/system/misc/blastShield", true));
+    buttonList.add( new ModToggle(610, 120, "Land\r\nGear\r\nDown", "Land\r\nGear\r\nUp", "/system/undercarriage/state", true));
+    buttonList.add( new ModToggle(680, 120, "Eng\r\nPuzzle\r\nOn", "Eng\r\nPuzzle\r\nOff", "/system/powerManagement/failureState", false));
 
     //eng difficulty  MOVE ME THESE ARE SHIT
     engDiffUp = new APButton(750, 120, 40, 40, "+");
@@ -50,10 +50,10 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/hangUp") );
 
     //screen power
-    buttonList.add( new ModToggle(300, 210, "pilot", "/pilot/powerState", false));
-    buttonList.add( new ModToggle(380, 210, "tactical", "/tactical/powerState", false));
-    buttonList.add( new ModToggle(460, 210, "comms", "/comms/powerState", false));
-    buttonList.add( new ModToggle(540, 210, "engineer", "/engineer/powerState", false));
+    buttonList.add( new ModToggle(300, 210, "Pilot", "/pilot/powerState", false));
+    buttonList.add( new ModToggle(380, 210, "Tactical", "/tactical/powerState", false));
+    buttonList.add( new ModToggle(460, 210, "Comms", "/comms/powerState", false));
+    buttonList.add( new ModToggle(540, 210, "Engineer", "/engineer/powerState", false));
 
 
     buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
@@ -73,7 +73,7 @@ public class ShipControls extends ControlPanel {
     noFill();
     stroke(255, 255, 255);
     rect(690, 270, width-690, height-270);
-    text("Diff: " + engDiff, 680, 200);
+    text("Diff: " + engDiff, 680, 210);
 
     text("failed reactor systems: " + failureCount + " / " + maxFailures, 280, 300);
     text("reactor On?: " + reactorState, 280, 320);

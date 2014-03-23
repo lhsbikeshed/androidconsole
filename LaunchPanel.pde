@@ -8,13 +8,13 @@ public class LaunchPanel extends ControlPanel {
     //  ModButton mb = new ModButton(150, 50, "test button", "/string/test");
     // widgetContainer.addWidget(mb);
 
-    buttonList.add( new ModToggle(20, 50, "Bay Doors", "/scene/launchland/dockingBay", false) );
-    buttonList.add( new ModToggle(110, 50, "Grav", "/scene/launchland/bayGravity", true) );
+    buttonList.add( new ModToggle(20, 50, "Bay Doors\r\nClosed", "Bay Doors\r\nOpen", "/scene/launchland/dockingBay", false) );
+    buttonList.add( new ModToggle(110, 50, "Grav\r\nOn", "Grav\r\nOff", "/scene/launchland/bayGravity", true) );
     buttonList.add( new ModButton(170, 50, "Launch", "/scene/launchland/startLaunch") );
-    ModToggle m =  new ModToggle(20, 100, "Clamp", "/system/misc/dockingClamp", true);
+    ModToggle m =  new ModToggle(20, 120, 90, 60, "Clamp\r\nConnected", "Clamp\r\nDisconected", "/system/misc/dockingClamp", true);
     m.setInverted(true);
     buttonList.add(m);
-    buttonList.add( new ModToggle(80, 100, "Missiles?", "/scene/launchland/trainingMissiles", false) );
+    buttonList.add( new ModToggle(110, 120, "Missiles\r\nOn", "Missiles\r\nOff", "/scene/launchland/trainingMissiles", false) );
 
     buttonList.add( new ModButton(20, 250, "Launch NPC", "/scene/launchland/launchOtherShip") );
     buttonList.add( new ModButton(120, 250, "NPC to gate", "/scene/launchland/otherShipToGate") );
