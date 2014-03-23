@@ -51,6 +51,13 @@ public class ModToggle extends APToggleButton {
     }
   }
 
+  public ModToggle (int x, int y, int w, int h, String title, String oscString, boolean startState) {
+    super(x, y, w, h, title);
+    setChecked(startState);
+    this.oscString = oscString;
+    serverMessage = oscString;
+  }
+
   public ModToggle(int x, int y, String titleOn, String titleOff, String oscString, boolean startState) {
     super(x, y, titleOn);
     setChecked(startState);
@@ -64,6 +71,13 @@ public class ModToggle extends APToggleButton {
     else {
       setText(titleOff);
     }
+  }
+
+  public ModToggle(int x, int y, String title, String oscString, boolean startState) {
+    super(x, y, title);
+    setChecked(startState);
+    this.oscString = oscString;
+    serverMessage = oscString;
   }
 
   public void setInverted(boolean state) {
