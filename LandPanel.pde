@@ -22,7 +22,7 @@ public class LandPanel extends ControlPanel {
     buttonList.add( new ModToggle(110, 40, "DockingComp", "/scene/launchland/dockingCompState", false) );
     
     
-    ModButton m3 =  new ModButton(10, 390, "JumpHere", "/game/takeMeTo");
+    ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
     m3.setValue(4);
     buttonList.add( m3 );
 

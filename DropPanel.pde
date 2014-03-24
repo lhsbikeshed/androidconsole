@@ -24,7 +24,7 @@ public class DropPanel extends ControlPanel {
     buttonList.add(m2 );
 
 
-    ModButton m3 =  new ModButton(10, 390, "JumpHere", "/game/takeMeTo");
+    ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
     m3.setValue(2);
     buttonList.add( m3 );
     
