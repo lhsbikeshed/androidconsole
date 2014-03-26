@@ -14,6 +14,7 @@ public class ShipControls extends ControlPanel {
     "up", "down", "Lowering..", "Raising.."
   };
 
+  long lastCommsKA = 0;
 
   APButton engDiffUp, engDiffDown, killButton;
   int engDiff = 0;
@@ -71,8 +72,17 @@ public class ShipControls extends ControlPanel {
     text("Systems", 290, 115);
     text("Screens", 290, 205);
     noFill();
+    
+    //rectangle around comms buttons
     stroke(255, 255, 255);
+    int c = 255 - (int)map(millis() - lastCommsKA, 0, 500, 0, 255);
+    if(c < 0) { c = 0; }
+    
+    fill(c,c, 0);
     rect(690, 270, width-690, height-270);
+    fill(255);
+    
+    
     text("Diff: " + engDiff, 680, 210);
 
     text("failed reactor systems: " + failureCount + " / " + maxFailures, 280, 300);
@@ -162,6 +172,8 @@ public class ShipControls extends ControlPanel {
       autoPilotState = message.get(0).intValue() == 1 ? true : false;
     } else if (message.checkAddrPattern("/game/reset")) {
       missionStartTime = millis();
+    } else if (message.checkAddrPattern("/display/captain/inCall")){
+      lastCommsKA = millis();
     }
   }
 }
