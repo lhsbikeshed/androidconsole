@@ -37,7 +37,7 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(460, 120, "Jump", "/system/jump/state", false));
     buttonList.add( new ModToggle(540, 120, "Blast\r\nShield\r\nDown", "Blast\r\nShield\r\nUp", "/system/misc/blastShield", true));
     buttonList.add( new ModToggle(610, 120, "Land\r\nGear\r\nDown", "Land\r\nGear\r\nUp", "/system/undercarriage/state", true));
-    buttonList.add( new ModToggle(680, 120, "Eng\r\nPuzzle\r\nOn", "Eng\r\nPuzzle\r\nOff", "/system/powerManagement/failureState", false));
+    buttonList.add( new ModToggle(680, 120, "Eng\r\nPuzzle\r\nOn", "Eng\r\nPuzzle\r\nOff", "/system/powerManagement/failureState", true));
 
     //eng difficulty  MOVE ME THESE ARE SHIT
     engDiffUp = new APButton(750, 120, 40, 40, "+");
