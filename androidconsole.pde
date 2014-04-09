@@ -33,31 +33,31 @@ void setup() {
 
 
   tabStrip = new TabStrip();
-  utilPanel = new UtilityPanel("utilities", this);
+  utilPanel = new UtilityPanel("util", this);
   tabStrip.addPanel(utilPanel);
   // tabStrip.addPanel(shipControls, "shipControls");
-
+  lightPanel = new LightPanel("light", this);
+  tabStrip.addPanel(lightPanel);
 
   launchPanel = new LaunchPanel("launch", this);
   tabStrip.addPanel(launchPanel);
 
-  hyperPanel = new HyperPanel("Hyperspace", this);
+  hyperPanel = new HyperPanel("Hyper", this);
   tabStrip.addPanel(hyperPanel);
 
-  dropPanel = new DropPanel("Dropscene", this);
+  dropPanel = new DropPanel("Drop", this);
   tabStrip.addPanel(dropPanel);
 
-  warzonePanel = new WarzonePanel("Warzone", this);
+  warzonePanel = new WarzonePanel("War", this);
   tabStrip.addPanel(warzonePanel);
   
-  landPanel = new LandPanel("landing", this);
+  landPanel = new LandPanel("land", this);
   tabStrip.addPanel(landPanel);
   
   deadPanel = new EndGamePanel("dead", this);
   tabStrip.addPanel(deadPanel);
 
-  lightPanel = new LightPanel("lighting", this);
-  tabStrip.addPanel(lightPanel);
+ 
 
   tabStrip.switchToTab("utilities");
 }

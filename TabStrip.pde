@@ -2,11 +2,13 @@ import java.util.Set;
 
 public class TabStrip {
 
-  HashMap<String, ControlPanel> tabMap = new HashMap();
+  //HashMap<String, ControlPanel> tabMap = new HashMap();
+
+  ArrayList<ControlPanel> tabMap = new ArrayList();
 
   ControlPanel currentPanel;
 
-  String[] tabNames = new String[0];
+ 
   int activeIndex = 0;
 
   public TabStrip() {
@@ -17,10 +19,13 @@ public class TabStrip {
       textFont(globalFont, 13);
       int startX = 15;
       int ind = 0;
-      for (String s : tabNames) {
-        int width = (int)textWidth(s);
+      for (ControlPanel c : tabMap) {
+        String s = c.getTitle();
+       
+        int width = c.titleWidth;
         if (x > startX && x < startX + width + 10) {
           switchToTab(s);
+           println(s);
         }
 
         startX += 10 + width;
@@ -36,8 +41,11 @@ public class TabStrip {
     textFont(globalFont, 13);
     int startX = 15;
     int ind = 0;
-    for (String s : tabNames) {
-      int width = (int)textWidth(s);
+    for (ControlPanel c : tabMap) {
+      String s = c.getTitle();
+      
+      int w = c.titleWidth;
+      
       if (activeIndex == ind) {
         fill(255, 255, 0);
       } 
@@ -45,46 +53,52 @@ public class TabStrip {
         fill(255, 255, 255);
       }
       text(s, startX + 10, 20);
-      startX += 10 + width;
+      startX += 10 + w;
       ind++;
     }
     noStroke();
-    currentPanel.draw();
+    if(currentPanel != null){
+      currentPanel.draw();
+    }
   }
 
   public void switchToTab(int sceneId) {
-    for (ControlPanel c : tabMap.values()) {
+    int ind = 0;
+    for (ControlPanel c : tabMap) {
       if (c.getSceneNumber() == sceneId) {
         if ( currentPanel != null ) currentPanel.hide();
         currentPanel = c;
         currentPanel.show();
-      }
-    }
-    int ind = 0;
-    for (String s : tabNames) {
-      if (s.equals(currentPanel.getTitle())) {
         activeIndex = ind;
       }
       ind++;
     }
+    
+    
   }
 
   public void switchToTab(String title) {
-    ControlPanel c = tabMap.get(title);
+    
+    ControlPanel c = null;
+     int ind = 0;
+    for(ControlPanel p : tabMap){
+      if(p.getTitle() == title){
+        c = p;
+        activeIndex = ind;
+        break;
+      }
+      ind++;
+    }
     if (c != null) {
       if (currentPanel != null) {
         currentPanel.hide();
       }
       currentPanel = c;
       currentPanel.show();
+    } else {
+       println("null");
     }
-    int ind = 0;
-    for (String s : tabNames) {
-      if (s.equals(currentPanel.getTitle())) {
-        activeIndex = ind;
-      }
-      ind++;
-    }
+    
   }
 
   public ControlPanel getActivePanel() {
@@ -93,10 +107,9 @@ public class TabStrip {
 
 
   public void addPanel(ControlPanel panel) {
-    tabMap.put(panel.getTitle(), panel);
+    tabMap.add(panel);
     println("added tab: " + panel.getTitle());
-    Set<String> keys = tabMap.keySet();
-    tabNames = keys.toArray(new String[0]);
+    
     panel.hide();
   }
 }

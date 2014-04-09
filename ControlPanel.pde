@@ -9,11 +9,14 @@ public abstract class ControlPanel{
    
   boolean isVisible = false;
   protected int sceneId = -1;
+  public int titleWidth = 70;
   
   public ControlPanel(String title, PApplet parent){
     this.title = title;
     this.parent = parent;
     widgetContainer = new APWidgetContainer(parent);
+    
+    
   }
   
   public void setSceneNumber(int id){
