@@ -19,7 +19,8 @@ public class LandPanel extends ControlPanel {
     
     
     buttonList.add( new ModButton(20, 40, "AutoDock", "/scene/launchland/autodock") );
-    buttonList.add( new ModToggle(110, 40, "DockingComp", "/scene/launchland/dockingCompState", false) );
+    buttonList.add( new ModButton(100, 40, "Cancel\r\nAutoDock", "/scene/launchland/stopautodock") );
+    buttonList.add( new ModToggle(20, 100, "DockingComp", "/scene/launchland/dockingCompState", false) );
     
     
     ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
