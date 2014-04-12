@@ -9,6 +9,8 @@ public class LightPanel extends ControlPanel {
   APRadioGroup lightGroup;
   APRadioButton[] radioList;
   ModToggle powerToggle;
+  ModToggle prayToggle, seatbeltToggle;
+
 
   public LightPanel(String title, PApplet parent) {
     super(title, parent);
@@ -24,13 +26,21 @@ public class LightPanel extends ControlPanel {
 
     powerToggle = new ModToggle(10, 60, "lightpower", "/system/effect/lightingPower", false);
     buttonList.add(powerToggle);
+
+    prayToggle = new ModToggle(110, 60, "pray", "/system/effect/prayLight", false);
+    seatbeltToggle = new ModToggle(150, 60, "seatbelt", "/system/effect/seatbeltLight", false);
+    buttonList.add(prayToggle);
+    buttonList.add(seatbeltToggle);  
+    
+    widgetContainer.addWidget(prayToggle);
+    widgetContainer.addWidget(seatbeltToggle);
     widgetContainer.addWidget(powerToggle);
   }
 
 
   public void onWidget(APWidget widget) {
     super.onWidget(widget);
-    
+
     if (widget instanceof APRadioButton) {
       String t = ((APRadioButton)widget).getText();
       for (int i = 0; i < lightingNames.length; i++) {
