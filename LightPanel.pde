@@ -28,7 +28,7 @@ public class LightPanel extends ControlPanel {
     buttonList.add(powerToggle);
 
     prayToggle = new ModToggle(110, 60, "pray", "/system/effect/prayLight", false);
-    seatbeltToggle = new ModToggle(150, 60, "seatbelt", "/system/effect/seatbeltLight", false);
+    seatbeltToggle = new ModToggle(170, 60, "seatbelt", "/system/effect/seatbeltLight", false);
     buttonList.add(prayToggle);
     buttonList.add(seatbeltToggle);  
     

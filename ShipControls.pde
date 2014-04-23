@@ -1,6 +1,10 @@
 
 
 public class ShipControls extends ControlPanel {
+  
+  
+  
+  
   public boolean reactorState = false;
   public boolean autoPilotState = false;
   public boolean canJump = false;
@@ -15,6 +19,10 @@ public class ShipControls extends ControlPanel {
   };
 
   long lastCommsKA = 0;
+  boolean incomingCall = false;
+  long incomingCallTime = 0;
+  String incomingFreq = "";
+  boolean dialSoundDone = false;
 
   APButton engDiffUp, engDiffDown, killButton;
   int engDiff = 0;
@@ -49,6 +57,7 @@ public class ShipControls extends ControlPanel {
     //vid calls
     buttonList.add( new ModButton(700, 280, "Vid Call", "/clientscreen/CommsStation/incomingCall") );
     buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/hangUp") );
+    //buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/incomingCall") );
 
     //screen power
     buttonList.add( new ModToggle(300, 210, "Pilot", "/pilot/powerState", false));
@@ -73,15 +82,31 @@ public class ShipControls extends ControlPanel {
     text("Screens", 290, 205);
     noFill();
     
+    //----------comms area
     //rectangle around comms buttons
     stroke(255, 255, 255);
     int c = 255 - (int)map(millis() - lastCommsKA, 0, 500, 0, 255);
     if(c < 0) { c = 0; }
-    
     fill(c,c, 0);
     rect(690, 270, width-690, height-270);
     fill(255);
     
+    if(incomingCall){
+      if(dialSoundDone == false){
+        playSound("ring.wav");
+        dialSoundDone = true;
+      }
+      if(incomingCallTime + 5000 > millis()){
+        fill(128,0,0);
+        rect(660, 240, 150, 30);
+      } else {
+        incomingCall = false;
+      }
+      fill(255);
+      text("freq: " + incomingFreq, 680, 260);
+    }
+    
+    //---------stuff
     
     text("Diff: " + engDiff, 680, 210);
 
@@ -103,6 +128,8 @@ public class ShipControls extends ControlPanel {
     
     text("AP?: " + autoPilotState, 530, 400);
     
+    
+    
     long t = millis() - missionStartTime;
     int min = (int)((t / 1000 / 60) % 60);
     int sec = (int)((t / 1000) % 60);
@@ -115,7 +142,7 @@ public class ShipControls extends ControlPanel {
     if (buttonList.contains(widget)) {
       super.onWidget(widget);
     }
-
+    
     if (widget == engDiffUp) {
       engDiff++;
       if (engDiff > 10) {
@@ -174,6 +201,11 @@ public class ShipControls extends ControlPanel {
       missionStartTime = millis();
     } else if (message.checkAddrPattern("/display/captain/inCall")){
       lastCommsKA = millis();
+    } else if (message.checkAddrPattern("/display/captain/dialRequest")){
+      incomingCallTime = millis();
+      incomingFreq = message.get(0).stringValue();
+      dialSoundDone = false;
+      incomingCall = true;
     }
   }
 }

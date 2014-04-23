@@ -21,6 +21,8 @@ PFont globalFont;
 TabStrip tabStrip;
 
 ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel, lightPanel;
+APMediaPlayer player;
+
 
 void setup() {
   orientation(LANDSCAPE);
@@ -60,6 +62,22 @@ void setup() {
  
 
   tabStrip.switchToTab("utilities");
+  
+  player = new APMediaPlayer(this); //create new APMediaPlayer
+}
+
+public void playSound(String s){
+  player.setMediaFile(s);
+  player.start();
+  
+}
+
+public void onDestroy(){
+  super.onDestroy(); //call onDestroy on super class
+  if(player!=null) { //must be checked because or else crash when return from landscape mode
+    player.release(); //release the player
+
+  }
 }
 
 void draw() {
