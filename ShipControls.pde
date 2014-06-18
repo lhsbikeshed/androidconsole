@@ -36,6 +36,8 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModButton(380, 50, "Reactor\r\nFail", "/system/reactor/fail") );
     buttonList.add( new ModButton(460, 50, "Self\r\nDestruct", "/system/reactor/overload") );
     buttonList.add( new ModButton(540, 50, "SD Cancel", "/system/reactor/overloadinterrupt") );
+    buttonList.add( new ModButton(720, 50, "cable\r\npuzzle", "/system/cablePuzzle/startPuzzle") );
+
     killButton = new APButton(620, 50, "kill ship");
     buttonList.add( killButton);
 
