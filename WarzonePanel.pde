@@ -26,14 +26,8 @@ public class WarzonePanel extends ControlPanel {
     buttonList.add( new ModButton(120, 100, "Shoot at ship", "/scene/warzone/createBastard") );
 
     buttonList.add( new ModToggle(20, 150, "Missiles?", "/scene/warzone/missileLauncherStatus", false) );
-
-    /*
-    buttonList.add( new ModToggle(80, 100, "Missiles?", "/scene/launchland/trainingMissiles", false) );
-     
-     buttonList.add( new ModButton(20, 250, "Launch NPC", "/scene/launchland/launchOtherShip") );
-     buttonList.add( new ModButton(120, 250, "NPC to gate", "/scene/launchland/otherShipToGate") );
-     buttonList.add( new ModButton(20, 300, "NPC hyper", "/scene/launchland/otherShipHyperspace") );*/
-
+    buttonList.add( new ModButton(120, 150, "missile", "/scene/warzone/spawnMissile") );
+    
     ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
     m3.setValue(3);
     buttonList.add( m3 );
@@ -42,7 +36,7 @@ public class WarzonePanel extends ControlPanel {
       widgetContainer.addWidget(w);
     }
 
-    diffUp = new APButton(180, 200, 40, 40, "+");
+    diffUp = new APButton(120, 200, 40, 40, "+");
     diffDown = new APButton(20, 200, 40, 40, "-");
     widgetContainer.addWidget(diffUp);
     widgetContainer.addWidget(diffDown);
@@ -70,7 +64,9 @@ public class WarzonePanel extends ControlPanel {
 
   public  void draw() {
     textFont(globalFont, 13);
-    text("Missile\r\nDifficulty: " + missileDifficulty, 60, 216);
+    text("Missile\r\nDiff: " + missileDifficulty, 60, 216);
+    text("count: " + missilesInPlay, 170,216);
+    
     textFont(globalFont, 13);
     text("Beam\r\nDifficulty: " + beamDifficulty, 60, 320);
 

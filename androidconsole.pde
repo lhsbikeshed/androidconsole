@@ -23,6 +23,8 @@ TabStrip tabStrip;
 ControlPanel utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel, lightPanel;
 APMediaPlayer player;
 
+int missilesInPlay = 0;
+
 
 void setup() {
   orientation(LANDSCAPE);
@@ -120,6 +122,14 @@ void oscEvent(OscMessage theOscMessage) {
   if (theOscMessage.checkAddrPattern("/scene/change")==true) {
     int scene = theOscMessage.get(0).intValue();
     tabStrip.switchToTab(scene);
+  } else if (theOscMessage.checkAddrPattern("/scene/warzone/missilelaunch")){
+     missilesInPlay++;
+     
+  } else if (theOscMessage.checkAddrPattern("/scene/warzone/missileexplode")){
+     missilesInPlay--;
+     
+  } else if (theOscMessage.checkAddrPattern("/game/reset")){
+    missilesInPlay = 0;
   }
  // println("ass");
   //pass to active tab

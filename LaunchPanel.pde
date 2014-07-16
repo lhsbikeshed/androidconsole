@@ -7,10 +7,10 @@ public class LaunchPanel extends ControlPanel {
     super(title, parent);
     //  ModButton mb = new ModButton(150, 50, "test button", "/string/test");
     // widgetContainer.addWidget(mb);
-
-    buttonList.add( new ModToggle(20, 50, "Bay Doors\r\nOpen", "Bay Doors\r\nClosed", "/scene/launchland/dockingBay", false) );
+    buttonList.add( new ModButton(20, 50, "Launch", "/scene/launchland/startLaunch") );
+    
     buttonList.add( new ModToggle(110, 50, "Grav\r\nOn", "Grav\r\nOff", "/scene/launchland/bayGravity", true) );
-    buttonList.add( new ModButton(170, 50, "Launch", "/scene/launchland/startLaunch") );
+    buttonList.add( new ModToggle(170, 50, "Bay Doors\r\nOpen", "Bay Doors\r\nClosed", "/scene/launchland/dockingBay", false) );
     ModToggle m =  new ModToggle(20, 120, 90, 60, "Clamp\r\nConnected", "Clamp\r\nDisconected", "/system/misc/dockingClamp", true);
     m.setInverted(true);
     buttonList.add(m);
@@ -38,8 +38,6 @@ public class LaunchPanel extends ControlPanel {
 
 
   public  void oscReceive(OscMessage message) {
-
-    
   }
 }
 
