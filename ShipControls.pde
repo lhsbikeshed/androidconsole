@@ -32,26 +32,27 @@ public class ShipControls extends ControlPanel {
     super(title, parent);
     //control area at 280,20
     //annoyances
-    buttonList.add( new ModButton(300, 50, "Damage\r\nShip", "/ship/damage") );
-    buttonList.add( new ModButton(380, 50, "Reactor\r\nFail", "/system/reactor/fail") );
-    buttonList.add( new ModButton(460, 50, "Self\r\nDestruct", "/system/reactor/overload") );
-    buttonList.add( new ModButton(540, 50, "SD Cancel", "/system/reactor/overloadinterrupt") );
-    buttonList.add( new ModButton(720, 50, "cable\r\npuzzle", "/system/cablePuzzle/startPuzzle") );
+    buttonList.add( new ModButton(280, 50, "Damage\r\nShip", "/ship/damage") );
+    buttonList.add( new ModButton(360, 50, "Reactor\r\nFail", "/system/reactor/fail") );
+    buttonList.add( new ModButton(440, 50, "Self\r\nDestruct", "/system/reactor/overload") );
+    buttonList.add( new ModButton(520, 50, "SD Cancel", "/system/reactor/overloadinterrupt") );
+    buttonList.add( new ModButton(700, 50, "cable\r\npuzzle", "/system/cablePuzzle/startPuzzle") );
+    buttonList.add( new ModToggle(700, 110, "fuel leak", "/system/reactor/setFuelLeakFlag", false) );
 
     killButton = new APButton(620, 50, "kill ship");
     buttonList.add( killButton);
 
     //ship systems
     buttonList.add( new ModToggle(300, 120, "Reactor", "/system/reactor/setstate", false));
-    buttonList.add( new ModToggle(380, 120, "Prop", "/system/propulsion/state", false));
-    buttonList.add( new ModToggle(460, 120, "Jump", "/system/jump/state", false));
-    buttonList.add( new ModToggle(540, 120, "Blast\r\nShield\r\nDown", "Blast\r\nShield\r\nUp", "/system/misc/blastShield", true));
-    buttonList.add( new ModToggle(610, 120, "Land\r\nGear\r\nDown", "Land\r\nGear\r\nUp", "/system/undercarriage/state", true));
-    buttonList.add( new ModToggle(680, 120, "Eng\r\nPuzzle\r\nOn", "Eng\r\nPuzzle\r\nOff", "/system/powerManagement/failureState", true));
+    buttonList.add( new ModToggle(360, 120, "Prop", "/system/propulsion/state", false));
+   // buttonList.add( new ModToggle(460, 120, "Jump", "/system/jump/state", false));
+    buttonList.add( new ModToggle(420, 120, "Blast\r\nShield\r\nDown", "Blast\r\nShield\r\nUp", "/system/misc/blastShield", true));
+    buttonList.add( new ModToggle(480, 120, "Land\r\nGear\r\nDown", "Land\r\nGear\r\nUp", "/system/undercarriage/state", true));
+    buttonList.add( new ModToggle(540, 120, "Eng\r\nPuzzle\r\nOn", "Eng\r\nPuzzle\r\nOff", "/system/powerManagement/failureState", true));
 
     //eng difficulty  MOVE ME THESE ARE SHIT
-    engDiffUp = new APButton(750, 120, 40, 40, "+");
-    engDiffDown = new APButton(750, 170, 40, 40, "-");
+    engDiffUp = new APButton(530, 200, 40, 40, "+");
+    engDiffDown = new APButton(580, 200, 40, 40, "-");
     widgetContainer.addWidget(engDiffUp);
     widgetContainer.addWidget(engDiffDown);
 
@@ -62,12 +63,12 @@ public class ShipControls extends ControlPanel {
     //buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/incomingCall") );
 
     //screen power
-    buttonList.add( new ModToggle(300, 210, "Pilot", "/pilot/powerState", false));
-    buttonList.add( new ModToggle(380, 210, "Tactical", "/tactical/powerState", false));
-    buttonList.add( new ModToggle(460, 210, "Comms", "/comms/powerState", false));
-    buttonList.add( new ModToggle(540, 210, "Engineer", "/engineer/powerState", false));
+    buttonList.add( new ModToggle(300, 240, "Pilot", "/pilot/powerState", false));
+    buttonList.add( new ModToggle(360, 240, "Tactical", "/tactical/powerState", false));
+    buttonList.add( new ModToggle(420, 240, "Comms", "/comms/powerState", false));
+    buttonList.add( new ModToggle(480, 240, "Engineer", "/engineer/powerState", false));
 
-
+    buttonList.add( new ModToggle(610, 290, "JumpOn?", "/system/jump/state", false));
     buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
     buttonList.add( new ModToggle(540, 340, "autopilot", "/system/control/controlState", false));
     for (APWidget w : buttonList) {
@@ -81,7 +82,7 @@ public class ShipControls extends ControlPanel {
     textFont(globalFont, 15);
     text("Annoyances", 290, 45);
     text("Systems", 290, 115);
-    text("Screens", 290, 205);
+    text("Screens", 290, 235);
     noFill();
     
     //----------comms area
@@ -110,7 +111,7 @@ public class ShipControls extends ControlPanel {
     
     //---------stuff
     
-    text("Diff: " + engDiff, 680, 210);
+    text("Diff: " + engDiff, 550, 250);
 
     text("failed reactor systems: " + failureCount + " / " + maxFailures, 280, 300);
     text("reactor On?: " + reactorState, 280, 320);
@@ -136,7 +137,7 @@ public class ShipControls extends ControlPanel {
     int min = (int)((t / 1000 / 60) % 60);
     int sec = (int)((t / 1000) % 60);
     
-    text("T: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), 630, 230);
+    text("T: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), 680, 260);
     
   }
 
