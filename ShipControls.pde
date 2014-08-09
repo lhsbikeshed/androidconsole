@@ -38,6 +38,8 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModButton(520, 50, "SD Cancel", "/system/reactor/overloadinterrupt") );
     buttonList.add( new ModButton(700, 50, "cable\r\npuzzle", "/system/cablePuzzle/startPuzzle") );
     buttonList.add( new ModToggle(700, 110, "fuel leak", "/system/reactor/setFuelLeakFlag", false) );
+    buttonList.add( new ModButton(620, 110, "Flap", "/ship/effect/openFlap") );
+
 
     killButton = new APButton(620, 50, "kill ship");
     buttonList.add( killButton);
