@@ -35,9 +35,22 @@ public class TabStrip {
   }
 
   public void draw() {
+    
+    noStroke();
+    pushMatrix();
+    translate(0, -offset);
+    if(currentPanel != null){
+      currentPanel.draw();
+    }
+    popMatrix();
+    
+    
     stroke(255, 255, 255);
+    fill(0);
+    rect(0,0,width, 25);
     line(0, 25, width, 25);
 
+    fill(255);
     textFont(globalFont, 13);
     int startX = 15;
     int ind = 0;
@@ -55,10 +68,6 @@ public class TabStrip {
       text(s, startX + 10, 20);
       startX += 10 + w;
       ind++;
-    }
-    noStroke();
-    if(currentPanel != null){
-      currentPanel.draw();
     }
   }
 

@@ -25,10 +25,24 @@ APMediaPlayer player;
 
 int missilesInPlay = 0;
 
+//mission timer 
+// althought technically part of the warzone stuff I've put it in this class
+// as having it globally available is more useful. It also means that if the tab is wrong when the timer starts we dont
+// miss the start signal
+long countdownStartTime = 1000;
+boolean countdownRunning = false;
+long countdownDuration = 120000;//900000; //15 min defaul
+
+
+//drawing offset
+int offset = 0;
+int startOffset = 0;
+MyScrollView scrollView;
+
 
 void setup() {
   orientation(LANDSCAPE);
-  
+
   oscP5 = new OscP5(this, 12005);
   shipControls = new ShipControls("ship", this); 
 
@@ -54,39 +68,54 @@ void setup() {
 
   warzonePanel = new WarzonePanel("War", this);
   tabStrip.addPanel(warzonePanel);
-  
+
   landPanel = new LandPanel("land", this);
   tabStrip.addPanel(landPanel);
-  
+
   deadPanel = new EndGamePanel("dead", this);
   tabStrip.addPanel(deadPanel);
 
- 
+
 
   tabStrip.switchToTab("utilities");
-  
+
   player = new APMediaPlayer(this); //create new APMediaPlayer
+
+  scrollView = (MyScrollView)getWindow().findViewById(983475893);
+  if (scrollView == null) {
+    println("NULL SCROLL VIEW");
+  }
 }
 
-public void playSound(String s){
+public void playSound(String s) {
   player.setMediaFile(s);
   player.start();
-  
 }
 
-public void onDestroy(){
+public void onDestroy() {
   super.onDestroy(); //call onDestroy on super class
-  if(player!=null) { //must be checked because or else crash when return from landscape mode
+  if (player!=null) { //must be checked because or else crash when return from landscape mode
     player.release(); //release the player
-
   }
 }
 
 void draw() {
 
   background(0); //black background
+
+
+
   tabStrip.draw();
+
+  if (scrollView != null) {
+    offset = scrollView.getScrollY();
+
+   
+  }
+  pushMatrix();
+  translate(0, -offset);
   shipControls.draw();
+  popMatrix();
   stroke(255, 255, 255);
   line(260, 25, 260, height);
 }
@@ -122,16 +151,23 @@ void oscEvent(OscMessage theOscMessage) {
   if (theOscMessage.checkAddrPattern("/scene/change")==true) {
     int scene = theOscMessage.get(0).intValue();
     tabStrip.switchToTab(scene);
-  } else if (theOscMessage.checkAddrPattern("/scene/warzone/missilelaunch")){
-     missilesInPlay++;
-     
-  } else if (theOscMessage.checkAddrPattern("/scene/warzone/missileexplode")){
-     missilesInPlay--;
-     
-  } else if (theOscMessage.checkAddrPattern("/game/reset")){
+  } 
+  else if (theOscMessage.checkAddrPattern("/scene/warzone/missilelaunch")) {
+    missilesInPlay++;
+  } 
+  else if (theOscMessage.checkAddrPattern("/scene/warzone/missileexplode")) {
+    missilesInPlay--;
+  } 
+  else if (theOscMessage.checkAddrPattern("/game/reset")) {
     missilesInPlay = 0;
+    countdownRunning = false;
+  } 
+  else if (theOscMessage.checkAddrPattern("/scene/warzone/evacStart")) {
+    countdownRunning = true;
+    countdownStartTime = millis();
+    countdownDuration = (long)theOscMessage.get(0).intValue();
   }
- // println("ass");
+  // println("ass");
   //pass to active tab
   tabStrip.getActivePanel().oscReceive(theOscMessage);
   shipControls.oscReceive(theOscMessage);

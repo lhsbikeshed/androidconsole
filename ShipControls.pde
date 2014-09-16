@@ -27,6 +27,9 @@ public class ShipControls extends ControlPanel {
   APButton engDiffUp, engDiffDown, killButton;
   int engDiff = 0;
   long missionStartTime = 0;
+  
+  
+
 
   public ShipControls(String title, PApplet parent) {
     super(title, parent);
@@ -40,6 +43,8 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(700, 110, "fuel leak", "/system/reactor/setFuelLeakFlag", false) );
     buttonList.add( new ModButton(620, 110, "Flap", "/ship/effect/openFlap") );
 
+    
+    
 
     killButton = new APButton(620, 50, "kill ship");
     buttonList.add( killButton);
@@ -73,14 +78,28 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(610, 290, "JumpOn?", "/system/jump/state", false));
     buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
     buttonList.add( new ModToggle(540, 340, "autopilot", "/system/control/controlState", false));
+    
+     buttonList.add( new ModButton(700, 680, "Vid Call", "/clientscreen/CommsStation/incomingCall") );
+     
+     
+     //now add the buttons to the panel    
+    
     for (APWidget w : buttonList) {
       widgetContainer.addWidget(w);
     }
+    
+    
+    
+    
+    
   }
 
 
 
   public void draw() {
+    
+    
+    
     textFont(globalFont, 15);
     text("Annoyances", 290, 45);
     text("Systems", 290, 115);
