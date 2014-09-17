@@ -64,26 +64,28 @@ public class WarzonePanel extends ControlPanel {
 
   public  void draw() {
     textFont(globalFont, 13);
-    long t = countdownDuration - (millis() - countdownStartTime) ;
-
-    long min = (t / 1000 / 60);
-    String minString = "" + min;
-    if (min <= 0) {
-      minString = "00";
-    } 
-    else if (min < 10) {
-      minString = "0" + min;
+    if(countdownRunning){
+      long t = countdownDuration - (millis() - countdownStartTime) ;
+  
+      long min = (t / 1000 / 60);
+      String minString = "" + min;
+      if (min <= 0) {
+        minString = "00";
+      } 
+      else if (min < 10) {
+        minString = "0" + min;
+      }
+  
+      long sec = (t / 1000) % 60;
+      String secString = "" + sec;
+      if (sec <= 0) {
+        secString = "00";
+      } 
+      else if (sec < 10) {
+        secString = "0" + secString;
+      }
+      text("evac: " + minString + ":" + secString, 120, 80);
     }
-
-    long sec = (t / 1000) % 60;
-    String secString = "" + sec;
-    if (sec <= 0) {
-      secString = "00";
-    } 
-    else if (sec < 10) {
-      secString = "0" + secString;
-    }
-    text("evac: " + minString + ":" + secString, 120, 180);
 
       text("Missile\r\nDiff: " + missileDifficulty, 60, 216);
     text("count: " + missilesInPlay, 170, 216);

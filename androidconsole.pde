@@ -31,7 +31,7 @@ int missilesInPlay = 0;
 // miss the start signal
 long countdownStartTime = 1000;
 boolean countdownRunning = false;
-long countdownDuration = 120000;//900000; //15 min defaul
+long countdownDuration = 900000;//900000; //15 min defaul
 
 
 //drawing offset
