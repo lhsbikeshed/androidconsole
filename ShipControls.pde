@@ -29,7 +29,8 @@ public class ShipControls extends ControlPanel {
   long missionStartTime = 0;
   
   
-
+  ModButton testButton;
+  ModToggle t;
 
   public ShipControls(String title, PApplet parent) {
     super(title, parent);
@@ -43,7 +44,9 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(700, 110, "fuel leak", "/system/reactor/setFuelLeakFlag", false) );
     buttonList.add( new ModButton(620, 110, "Flap", "/ship/effect/openFlap") );
 
-    
+    testButton =  new ModButton(280, 450, "TEst Button", "/ship/ass");
+    buttonList.add(testButton);
+    t = new ModToggle(280, 500, "test toggle", "/system/a/a", false);
     
 
     killButton = new APButton(620, 50, "kill ship");
@@ -66,7 +69,11 @@ public class ShipControls extends ControlPanel {
 
     //vid calls
     buttonList.add( new ModButton(700, 280, "Vid Call", "/clientscreen/CommsStation/incomingCall") );
-    buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/hangUp") );
+    ModButton audCall = new ModButton(700, 330, "Aud Call", "/clientscreen/CommsStation/incomingCall");
+    audCall.setValue(1);
+    buttonList.add( audCall );
+
+    buttonList.add( new ModButton(700, 390, "hang up", "/clientscreen/CommsStation/hangUp") );
     //buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/incomingCall") );
 
     //screen power
