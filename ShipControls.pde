@@ -29,8 +29,8 @@ public class ShipControls extends ControlPanel {
   long missionStartTime = 0;
   
   
-  ModButton testButton;
-  ModToggle t;
+  APButton testButton;
+  ModToggle testToggle;
 
   public ShipControls(String title, PApplet parent) {
     super(title, parent);
@@ -44,9 +44,6 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(700, 110, "fuel leak", "/system/reactor/setFuelLeakFlag", false) );
     buttonList.add( new ModButton(620, 110, "Flap", "/ship/effect/openFlap") );
 
-    testButton =  new ModButton(280, 450, "TEst Button", "/ship/ass");
-    buttonList.add(testButton);
-    t = new ModToggle(280, 500, "test toggle", "/system/a/a", false);
     
 
     killButton = new APButton(620, 50, "kill ship");
@@ -73,21 +70,26 @@ public class ShipControls extends ControlPanel {
     audCall.setValue(1);
     buttonList.add( audCall );
 
-    buttonList.add( new ModButton(700, 390, "hang up", "/clientscreen/CommsStation/hangUp") );
+    buttonList.add( new ModButton(700, 380, "hang up", "/clientscreen/CommsStation/hangUp") );
     //buttonList.add( new ModButton(700, 340, "hang up", "/clientscreen/CommsStation/incomingCall") );
 
     //screen power
-    buttonList.add( new ModToggle(300, 240, "Pilot", "/pilot/powerState", false));
-    buttonList.add( new ModToggle(360, 240, "Tactical", "/tactical/powerState", false));
-    buttonList.add( new ModToggle(420, 240, "Comms", "/comms/powerState", false));
-    buttonList.add( new ModToggle(480, 240, "Engineer", "/engineer/powerState", false));
+    buttonList.add( new ModToggle(300, 270, "Pilot", "/pilot/powerState", false));
+    buttonList.add( new ModToggle(360, 270, "Tactical", "/tactical/powerState", false));
+    buttonList.add( new ModToggle(420, 270, "Comms", "/comms/powerState", false));
+    buttonList.add( new ModToggle(480, 270, "Engineer", "/engineer/powerState", false));
 
     buttonList.add( new ModToggle(610, 290, "JumpOn?", "/system/jump/state", false));
     buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
     buttonList.add( new ModToggle(540, 340, "autopilot", "/system/control/controlState", false));
     
-     buttonList.add( new ModButton(700, 680, "Vid Call", "/clientscreen/CommsStation/incomingCall") );
-     
+    ModButton m = new ModButton(700, 640, "Rick Roll", "/clientscreen/CommsStation/playVideo") ;
+    m.setValue("never.mov");
+    buttonList.add(m);
+
+    
+    
+
      
      //now add the buttons to the panel    
     
@@ -110,7 +112,7 @@ public class ShipControls extends ControlPanel {
     textFont(globalFont, 15);
     text("Annoyances", 290, 45);
     text("Systems", 290, 115);
-    text("Screens", 290, 235);
+    text("Screens", 290, 265);
     noFill();
     
     //----------comms area
@@ -141,9 +143,8 @@ public class ShipControls extends ControlPanel {
     
     text("Diff: " + engDiff, 550, 250);
 
-    text("failed reactor systems: " + failureCount + " / " + maxFailures, 280, 300);
-    text("reactor On?: " + reactorState, 280, 320);
-    text("Can jump? : " + canJump, 280, 340);
+   
+
     if(canJump){
       noFill();
       strokeWeight(3);
@@ -151,10 +152,10 @@ public class ShipControls extends ControlPanel {
       rect(610,330, 60,50);
       strokeWeight(1);
     }
-
-    text("Hull Health: " + hull, 280, 360);
-    text("o2 Level: " + oxygenLevel, 280, 380);
-    text("Jump Charge: " + jumpCharge, 280, 400);
+    
+    text("failed r systems: " + failureCount + " / " + maxFailures, 280, 360);
+    text("Hull Health: " + hull, 280, 380);
+    text("o2 Level: " + oxygenLevel, 280, 400);
     text("Undercarriage: " + undercarriageStrings[undercarriageState], 280, 420);
     
     text("AP?: " + autoPilotState, 530, 400);
@@ -165,7 +166,7 @@ public class ShipControls extends ControlPanel {
     int min = (int)((t / 1000 / 60) % 60);
     int sec = (int)((t / 1000) % 60);
     
-    text("T: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), 680, 260);
+    text("T: " + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec), 690, 260);
     
   }
 
@@ -195,6 +196,9 @@ public class ShipControls extends ControlPanel {
       OscMessage m = new OscMessage("/game/KillPlayers");
       m.add("Dead");
       new SendOSCTask().execute(m);
+    } else if (widget == testButton){
+      println("test button!");
+      testToggle.setChecked(true);
     }
       
   }

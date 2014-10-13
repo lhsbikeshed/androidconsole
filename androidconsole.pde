@@ -151,6 +151,9 @@ void oscEvent(OscMessage theOscMessage) {
   if (theOscMessage.checkAddrPattern("/scene/change")==true) {
     int scene = theOscMessage.get(0).intValue();
     tabStrip.switchToTab(scene);
+    if(scene == 0){
+      missilesInPlay = 0;
+    }
   } 
   else if (theOscMessage.checkAddrPattern("/scene/warzone/missilelaunch")) {
     missilesInPlay++;

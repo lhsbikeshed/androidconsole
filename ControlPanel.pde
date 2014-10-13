@@ -51,7 +51,7 @@ public abstract class ControlPanel{
     if(!buttonList.contains(widget)){
       return;
     }
-     println("Clickbase");
+     
      //check to see if its an OSC sending control
     try {
       ModButton mb = (ModButton)widget;

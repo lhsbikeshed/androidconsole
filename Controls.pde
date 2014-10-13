@@ -1,7 +1,10 @@
+import android.view.View;
+
 
 public class ModButton extends APButton {
   String oscString = "/unnasigned";
-  int value = 0;
+  Object value ;
+
   boolean sendValue = false;
 
   public ModButton (int x, int y, int w, int h, String title, String oscString) {
@@ -9,8 +12,10 @@ public class ModButton extends APButton {
     this.oscString = oscString;
   }
 
-  public void setValue(int value) {
+
+  public <T> void setValue(T value) {
     this.value = value;
+    println("setting: " + value.getClass().getSimpleName());
     sendValue = true;
   }
 
@@ -24,7 +29,17 @@ public class ModButton extends APButton {
     OscMessage m[] = new OscMessage[1];
     m[0] =  new OscMessage(oscString);
     if (sendValue) {
-      m[0].add(value);
+      
+      if (value instanceof Integer) {
+
+        m[0].add(((Integer)value).intValue());
+      } 
+      else if (value instanceof Float) {
+        m[0].add(((Float)value).floatValue());
+      } 
+      else if( value instanceof String){
+        m[0].add((String)value);
+      }
     }
     return m;
   }
@@ -35,6 +50,8 @@ public class ModToggle extends APToggleButton {
   String oscString = "/unnasigned";
   String serverMessage = "";
   boolean inverted = false;
+
+  boolean wasClicked = false;
 
   public ModToggle (int x, int y, int w, int h, String titleOn, String titleOff, String oscString, boolean startState) {
     super(x, y, w, h, titleOn);
@@ -78,6 +95,22 @@ public class ModToggle extends APToggleButton {
     setChecked(startState);
     this.oscString = oscString;
     serverMessage = oscString;
+  }
+
+  public void onClick(View view) {
+    super.onClick(view);
+    wasClicked = true;
+  }
+
+
+  public void setChecked(boolean checked) {
+    if (wasClicked) {
+      super.setChecked(checked);
+      wasClicked = false;
+    } 
+    else {
+      checked = checked;
+    }
   }
 
   public void setInverted(boolean state) {
