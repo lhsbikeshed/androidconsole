@@ -52,6 +52,8 @@ public class ShipControls extends ControlPanel {
     //ship systems
     buttonList.add( new ModToggle(300, 120, "Reactor", "/system/reactor/setstate", false));
     buttonList.add( new ModToggle(360, 120, "Prop", "/system/propulsion/state", false));
+    buttonList.add( new ModToggle(300, 160, "Guns", "/system/targetting/changeWeaponState", false));
+    
    // buttonList.add( new ModToggle(460, 120, "Jump", "/system/jump/state", false));
     buttonList.add( new ModToggle(420, 120, "Blast\r\nShield\r\nDown", "Blast\r\nShield\r\nUp", "/system/misc/blastShield", true));
     buttonList.add( new ModToggle(480, 120, "Land\r\nGear\r\nDown", "Land\r\nGear\r\nUp", "/system/undercarriage/state", true));
@@ -81,7 +83,12 @@ public class ShipControls extends ControlPanel {
 
     buttonList.add( new ModToggle(610, 290, "JumpOn?", "/system/jump/state", false));
     buttonList.add( new ModButton(620, 340, "Jump", "/system/jump/startJump") );
-    buttonList.add( new ModToggle(540, 340, "autopilot", "/system/control/controlState", false));
+    buttonList.add( new ModToggle(620, 390, "autopilot", "/system/control/controlState", false));
+    
+    ModButton clearPlot = new ModButton(570, 340, "clear\r\nplot", "/system/jump/setRoute");
+    clearPlot.setValue(1);
+    buttonList.add(clearPlot);
+    
     
     ModButton m = new ModButton(700, 640, "Rick Roll", "/clientscreen/CommsStation/playVideo") ;
     m.setValue("never.mov");
@@ -158,7 +165,7 @@ public class ShipControls extends ControlPanel {
     text("o2 Level: " + oxygenLevel, 280, 400);
     text("Undercarriage: " + undercarriageStrings[undercarriageState], 280, 420);
     
-    text("AP?: " + autoPilotState, 530, 400);
+    text("AP?: " + autoPilotState, 520, 410);
     
     
     
@@ -196,9 +203,6 @@ public class ShipControls extends ControlPanel {
       OscMessage m = new OscMessage("/game/KillPlayers");
       m.add("Dead");
       new SendOSCTask().execute(m);
-    } else if (widget == testButton){
-      println("test button!");
-      testToggle.setChecked(true);
     }
       
   }

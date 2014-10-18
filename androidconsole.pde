@@ -148,6 +148,7 @@ private class SendOSCTask extends AsyncTask<OscMessage, Void, String> {
 }
 
 void oscEvent(OscMessage theOscMessage) {
+  try{
   if (theOscMessage.checkAddrPattern("/scene/change")==true) {
     int scene = theOscMessage.get(0).intValue();
     tabStrip.switchToTab(scene);
@@ -172,8 +173,11 @@ void oscEvent(OscMessage theOscMessage) {
   }
   // println("ass");
   //pass to active tab
-  tabStrip.getActivePanel().oscReceive(theOscMessage);
+  if(tabStrip.getActivePanel() != null){
+    tabStrip.getActivePanel().oscReceive(theOscMessage);
+  }
   shipControls.oscReceive(theOscMessage);
+  } catch (Exception e){ e.printStackTrace(); }
 }
 
 @Override

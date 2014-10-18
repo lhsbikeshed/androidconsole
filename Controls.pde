@@ -13,7 +13,7 @@ public class ModButton extends APButton {
   }
 
 
-  public <T> void setValue(T value) {
+  public void setValue(Object value) {
     this.value = value;
     println("setting: " + value.getClass().getSimpleName());
     sendValue = true;
