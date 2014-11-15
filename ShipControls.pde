@@ -87,7 +87,9 @@ public class ShipControls extends ControlPanel {
     buttonList.add( new ModToggle(620, 390, "autopilot", "/system/control/controlState", false));
     
     ModButton clearPlot = new ModButton(570, 340, "clear\r\nplot", "/system/jump/setRoute");
-    clearPlot.setValue(1);
+    int[] opts = {3,7};
+    int opt = (int)random(opts.length + 1);
+    clearPlot.setValue(opts[opt]);
     buttonList.add(clearPlot);
     
     
