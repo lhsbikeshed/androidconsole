@@ -11,9 +11,8 @@ public class LaunchPanel extends ControlPanel {
     
     buttonList.add( new ModToggle(110, 50, "Grav\r\nOn", "Grav\r\nOff", "/scene/launchland/bayGravity", true) );
     buttonList.add( new ModToggle(170, 50, "Bay Doors\r\nOpen", "Bay Doors\r\nClosed", "/scene/launchland/dockingBay", false) );
-    ModToggle m =  new ModToggle(20, 120, 90, 60, "Clamp\r\nConnected", "Clamp\r\nDisconected", "/system/misc/dockingClamp", true);
-    m.setInverted(true);
-    buttonList.add(m);
+    buttonList.add( new ModButton(20, 120, "clamp release", "/scene/launchland/releaseClamp") );
+
     buttonList.add( new ModToggle(110, 120, "Missiles\r\nOn", "Missiles\r\nOff", "/scene/launchland/trainingMissiles", false) );
 
     buttonList.add( new ModButton(20, 250, "Launch NPC", "/scene/launchland/launchOtherShip") );
