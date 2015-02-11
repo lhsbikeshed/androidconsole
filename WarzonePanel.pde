@@ -50,8 +50,6 @@ public class WarzonePanel extends ControlPanel {
     beamButton = new APButton(110, 340, "Beam Attempt");
     widgetContainer.addWidget(beamButton);
 
-    //map this tab to a scene number from the game
-    setSceneNumber(3);
   }
 
   public void show() {

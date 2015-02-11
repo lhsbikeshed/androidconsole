@@ -9,7 +9,6 @@ public abstract class ControlPanel{
   ArrayList<APWidget> buttonList = new ArrayList<APWidget>();
    
   boolean isVisible = false;
-  protected int sceneId = -1;
   public int titleWidth = 70;
   
   public ControlPanel(String title, PApplet parent){
@@ -20,13 +19,7 @@ public abstract class ControlPanel{
     
   }
   
-  public void setSceneNumber(int id){
-    sceneId = id;
-  }
-  
-  public int getSceneNumber(){
-    return sceneId;
-  }
+ 
   
   public void show(){
     if(widgetContainer != null){

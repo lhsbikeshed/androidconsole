@@ -36,8 +36,7 @@ public class CometPanel extends ControlPanel {
       widgetContainer.addWidget(w);
     }
 
-    //map this tab to a scene number from the game
-    setSceneNumber(2);
+
   }
 
   public void show() {

@@ -17,8 +17,6 @@ public class EndGamePanel extends ControlPanel {
 
    
 
-    //map this tab to a scene number from the game
-    setSceneNumber(5);
   }
 
   public  void initGui() {
