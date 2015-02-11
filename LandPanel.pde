@@ -7,6 +7,7 @@ public class LandPanel extends ControlPanel {
 
   public LandPanel(String title, PApplet parent) {
     super(title, parent);
+    sceneTag = "landing";
     //  ModButton mb = new ModButton(150, 50, "test button", "/string/test");
     // widgetContainer.addWidget(mb);
     
@@ -24,7 +25,7 @@ public class LandPanel extends ControlPanel {
     
     
     ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
-    m3.setValue(4);
+    m3.setValue(sceneTag);
     buttonList.add( m3 );
 
     for (APWidget w : buttonList) {

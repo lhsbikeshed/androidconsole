@@ -5,6 +5,7 @@ public class LaunchPanel extends ControlPanel {
 
   public LaunchPanel(String title, PApplet parent) {
     super(title, parent);
+    sceneTag = "launch";
     //  ModButton mb = new ModButton(150, 50, "test button", "/string/test");
     // widgetContainer.addWidget(mb);
     buttonList.add( new ModButton(20, 50, "Launch", "/scene/launchland/startLaunch") );

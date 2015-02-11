@@ -81,7 +81,7 @@ void setup() {
 
 
 
-  tabStrip.switchToTab("utilities");
+  tabStrip.switchToTabWithTag("utilities");
 
   player = new APMediaPlayer(this); //create new APMediaPlayer
 
@@ -154,9 +154,9 @@ private class SendOSCTask extends AsyncTask<OscMessage, Void, String> {
 void oscEvent(OscMessage theOscMessage) {
   try{
   if (theOscMessage.checkAddrPattern("/scene/change")==true) {
-    int scene = theOscMessage.get(0).intValue();
-    tabStrip.switchToTab(scene);
-    if(scene == 0){
+    String scene = theOscMessage.get(0).stringValue();
+    tabStrip.switchToTabWithTag(scene);
+    if(scene == "preload"){
       missilesInPlay = 0;
     }
   } 

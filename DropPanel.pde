@@ -15,6 +15,7 @@ public class DropPanel extends ControlPanel {
 
   public DropPanel(String title, PApplet parent) {
     super(title, parent);
+    sceneTag = "drop";
 
     ModButton m =  new ModButton(20, 50, "Repair Panel", "/scene/drop/droppanelrepaired");
     m.setValue(1);
@@ -25,7 +26,7 @@ public class DropPanel extends ControlPanel {
 
 
     ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
-    m3.setValue(2);
+    m3.setValue(sceneTag);
     buttonList.add( m3 );
     
 

@@ -8,7 +8,7 @@ public class HyperPanel extends ControlPanel {
 
   public HyperPanel(String title, PApplet parent) {
     super(title, parent);
-
+    sceneTag = "hyper1";
     setSceneNumber(1);
   }
 

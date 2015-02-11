@@ -18,6 +18,7 @@ public class WarzonePanel extends ControlPanel {
 
   public WarzonePanel(String title, PApplet parent) {
     super(title, parent);
+    sceneTag = "warzone-landing";
 
 
     buttonList.add( new ModButton(20, 50, "Start War", "/scene/warzone/warzonestart") );
@@ -29,7 +30,7 @@ public class WarzonePanel extends ControlPanel {
     buttonList.add( new ModButton(120, 150, "missile", "/scene/warzone/spawnMissile") );
 
     ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
-    m3.setValue(3);
+    m3.setValue(sceneTag);
     buttonList.add( m3 );
 
     for (APWidget w : buttonList) {

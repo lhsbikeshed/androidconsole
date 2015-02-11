@@ -3,6 +3,7 @@
 public abstract class ControlPanel{
   
   String title = "";
+  public String sceneTag = "";  //scene name sent by game 
   PApplet parent;
   APWidgetContainer widgetContainer;
   ArrayList<APWidget> buttonList = new ArrayList<APWidget>();

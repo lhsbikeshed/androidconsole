@@ -24,7 +24,7 @@ public class TabStrip {
        
         int width = c.titleWidth;
         if (x > startX && x < startX + width + 10) {
-          switchToTab(s);
+          switchToTabWithTag(c.sceneTag);
            println(s);
         }
 
@@ -71,10 +71,10 @@ public class TabStrip {
     }
   }
 
-  public void switchToTab(int sceneId) {
+  public void switchToTabWithTag(String sceneId) {
     int ind = 0;
     for (ControlPanel c : tabMap) {
-      if (c.getSceneNumber() == sceneId) {
+      if (c.sceneTag.equals(sceneId)) {
         if ( currentPanel != null ) currentPanel.hide();
         currentPanel = c;
         currentPanel.show();
@@ -86,29 +86,29 @@ public class TabStrip {
     
   }
 
-  public void switchToTab(String title) {
-    
-    ControlPanel c = null;
-     int ind = 0;
-    for(ControlPanel p : tabMap){
-      if(p.getTitle() == title){
-        c = p;
-        activeIndex = ind;
-        break;
-      }
-      ind++;
-    }
-    if (c != null) {
-      if (currentPanel != null) {
-        currentPanel.hide();
-      }
-      currentPanel = c;
-      currentPanel.show();
-    } else {
-       println("null");
-    }
-    
-  }
+//  public void switchToTab(String title) {
+//    
+//    ControlPanel c = null;
+//     int ind = 0;
+//    for(ControlPanel p : tabMap){
+//      if(p.getTitle() == title){
+//        c = p;
+//        activeIndex = ind;
+//        break;
+//      }
+//      ind++;
+//    }
+//    if (c != null) {
+//      if (currentPanel != null) {
+//        currentPanel.hide();
+//      }
+//      currentPanel = c;
+//      currentPanel.show();
+//    } else {
+//       println("null");
+//    }
+//    
+//  }
 
   public ControlPanel getActivePanel() {
     return currentPanel;

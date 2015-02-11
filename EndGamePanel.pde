@@ -6,7 +6,7 @@ public class EndGamePanel extends ControlPanel {
   
   public EndGamePanel(String title, PApplet parent) {
     super(title, parent);
-
+    sceneTag = "dead";
 
     buttonList.add( new ModButton(20, 50, "Reset", "/game/reset") );
     

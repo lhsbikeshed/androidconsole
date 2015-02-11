@@ -8,6 +8,7 @@ public class CometPanel extends ControlPanel {
 
   public CometPanel(String title, PApplet parent) {
     super(title, parent);
+    sceneTag = "comet-tunnel";
 
     ModButton m =  new ModButton(20, 50, "Fix Cables", "/system/cablePuzzle/cancelPuzzle");
     m.setValue(0);
@@ -27,7 +28,7 @@ public class CometPanel extends ControlPanel {
     buttonList.add(m5 );
 
     ModButton m3 =  new ModButton(10, 380, "JumpHere", "/game/takeMeTo");
-    m3.setValue(7);
+    m3.setValue(sceneTag);
     buttonList.add( m3 );
     
 

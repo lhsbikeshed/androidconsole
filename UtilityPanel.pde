@@ -8,6 +8,7 @@ public class UtilityPanel extends ControlPanel {
 
   public UtilityPanel(String title, PApplet parent) {
     super(title, parent);
+    sceneTag = "utilities";
     setIpButton = new APButton(150, 110, "Set Server IP"); 
     edit = new APEditText(10, 110, 100, 40);
 
