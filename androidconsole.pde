@@ -20,7 +20,7 @@ String serverIP = "10.0.0.100";
 PFont globalFont;
 TabStrip tabStrip;
 
-ControlPanel preloadPanel, utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, landPanel, deadPanel, lightPanel, cometPanel;
+ControlPanel preloadPanel, utilPanel, launchPanel, hyperPanel, dropPanel, warzonePanel, deadPanel, lightPanel, cometPanel;
 APMediaPlayer player;
 
 int missilesInPlay = 0;
@@ -74,10 +74,6 @@ void setup() {
   
   warzonePanel = new WarzonePanel("War", this);
   tabStrip.addPanel(warzonePanel);
- 
-
-  landPanel = new LandPanel("land", this);
-  tabStrip.addPanel(landPanel);
 
   deadPanel = new EndGamePanel("dead", this);
   tabStrip.addPanel(deadPanel);
