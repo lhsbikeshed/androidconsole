@@ -23,6 +23,9 @@ public class ShipControls extends ControlPanel {
   long incomingCallTime = 0;
   String incomingFreq = "";
   boolean dialSoundDone = false;
+  
+  
+  int[] fuelLevel = {0,0,0};
 
   APButton engDiffUp, engDiffDown, killButton;
   int engDiff = 0;
@@ -167,6 +170,8 @@ public class ShipControls extends ControlPanel {
     text("Hull Health: " + hull, 280, 380);
     text("o2 Level: " + oxygenLevel, 280, 400);
     text("Undercarriage: " + undercarriageStrings[undercarriageState], 280, 420);
+    text("fuel: " + fuelLevel[0] + "/" + fuelLevel[1] + "/" + fuelLevel[2], 280, 440);
+    
     
     text("AP?: " + autoPilotState, 520, 410);
     
@@ -248,6 +253,11 @@ public class ShipControls extends ControlPanel {
       incomingFreq = message.get(0).stringValue();
       dialSoundDone = false;
       incomingCall = true;
+    } else if (message.checkAddrPattern("/ship/state/fuelState")){
+      fuelLevel[0] = message.get(0).intValue();
+      fuelLevel[1] = message.get(1).intValue();
+      fuelLevel[2] = message.get(2).intValue();
+      
     }
   }
 }

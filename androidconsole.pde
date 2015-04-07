@@ -79,6 +79,7 @@ void setup() {
   tabStrip.addPanel(deadPanel);
 
 
+  tabStrip.addPanel(new RefuelPanel("refuel", this));
 
   tabStrip.switchToTabWithTag("utilities");
 
